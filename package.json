@@ -1,0 +1,26 @@
+{
+  "name": "nodeSite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:RinatDav/node-mongo-express.git",
+  "author": "RinatDav <chaogen2@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env PORT=3001 node index.js",
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-node": "^6.0.1",
+    "nodemon": "^1.17.4"
+  },
+  "engines": {
+    "node": ">=9.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cross-env": "^5.1.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
