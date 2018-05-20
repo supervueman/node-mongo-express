@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
+<% include layouts/head.ejs %>
 <body>
-  <a href="/create">create</a>
-  <ul>
-    <% arr.forEach((item) => { %>
-      <li><%= item %></li>
-    <% }); %>
-  </ul>
+  <% include layouts/header.ejs %>
+
+  <main class="main">
+    <div class="container">
+      <div class="content">
+        <div class="post">
+          <a href=""><h3 class="h3">Title 1</h3></a>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, nisi animi ipsa commodi voluptas fugiat unde dignissimos aliquam, quisquam, at rerum. Blanditiis, dicta accusamus molestias nulla qui eligendi similique rem?</p>
+          <div class="post-footer">
+            <div class="author">
+              Author: <a href="" class="link">Rinat</a>
+            </div>
+            <a class="link">
+              Comments
+            </a>
+          </div>
+        </div>
+        <div class="post">
+          <a href=""><h3 class="h3">Title 2</h3></a>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga, nisi animi ipsa commodi voluptas fugiat unde dignissimos aliquam, quisquam, at rerum. Blanditiis, dicta accusamus molestias nulla qui eligendi similique rem?</p>
+          <div class="post-footer">
+            <div class="author">
+              Author: <a href="" class="link">Rinat</a>
+            </div>
+            <a class="link">
+              Comments
+            </a>
+          </div>
+        </div>
+      </div>
+      <% include layouts/sidebar.ejs %>
+    </div>
+  </main>
+
+  <% include layouts/footer.ejs %>
 </body>
 </html>
