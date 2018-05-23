@@ -3,7 +3,10 @@ const bodyParser = require(`body-parser`);
 const path = require(`path`);
 const staticAsset = require(`static-asset`);
 const mongoose = require(`mongoose`);
+const session = require(`express-session`);
+const MongoStore = require(`connect-mongo`)(session);
 const config = require(`./config`);
+const routes = require(`./routes`);
 
 //Database
 mongoose.Promise = global.Promise;
@@ -20,9 +23,20 @@ mongoose.connect(config.MONGO_URL);
 //Express
 const app = express();
 
+app.use(
+  session({
+    secret: config.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    })
+  })
+);
 
 app.set(`view engine`, `ejs`);
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(staticAsset(path.join(__dirname, `public`)));
 app.use(express.static(path.join(__dirname, `public`)));
 app.use(
@@ -32,8 +46,19 @@ app.use(
 
 // Routers
 app.get(`/`, (req, res) => {
-  res.render(`index`)
+  const id = req.session.userId;
+  const login = req.session.userLogin;
+  res.render(`index`, {
+    user: {
+      id,
+      login
+    }
+  })
 });
+
+app.use('/api/auth/', routes.reg);
+app.use('/api/auth/', routes.auth);
+app.use('/api/auth/', routes.logout);
 
 app.use((req, res, next) => {
   const err = new Error(`Not Found`);
@@ -41,7 +66,7 @@ app.use((req, res, next) => {
   next(err);
 });
 
-app.use((error, req, res, next) => {
+app.use((error, req, res) => {
   res.status(error.status || 500);
   res.render(`error`, {
     message: error.message,

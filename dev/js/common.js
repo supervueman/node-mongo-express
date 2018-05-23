@@ -1,9 +1,10 @@
-/* eslint-disable */
+/* eslint-disable no-undef */
 $(function(){
   var box_link = $('.box-link'),
       forms = $('.forms');
 
-  box_link.click(function() {
+  box_link.click(function(e) {
+    e.preventDefault();
     forms.removeClass('visible box-active');
     var id = $(this).attr('href');
     var ths_form = $(id);
@@ -13,4 +14,54 @@ $(function(){
     }, 50);
   });
 });
-/* eslint-enable */
+
+// Registration
+$('.reg-btn').click(function(e){
+  e.preventDefault();
+  var data = {
+    login: $('#reg-login').val(),
+    password: $('#reg-pass').val(),
+    passwordConfirm: $('#reg-passconf').val()
+  };
+
+  $.ajax({
+    type: 'POST',
+    data: JSON.stringify(data),
+    contentType: 'application/json',
+    url: '/api/auth/register'
+  }).done(function(data){
+    console.log(data);
+    if (!data.ok) {
+      $('.reg .h3').after('<p class="error">' + data.error + '</p>');
+    } else {
+      $(location).attr('href', '/');
+      // $('.reg .h3').after('<p class="success">Success</p>');
+    }
+  });
+});
+
+
+// Authorization
+$('.auth-btn').click(function(e){
+  e.preventDefault();
+  var data = {
+    login: $('#auth-login').val(),
+    password: $('#auth-pass').val()
+  };
+
+  $.ajax({
+    type: 'POST',
+    data: JSON.stringify(data),
+    contentType: 'application/json',
+    url: '/api/auth/login'
+  }).done(function(data){
+    console.log(data);
+    if (!data.ok) {
+      $('.auth .h3').after('<p class="error">' + data.error + '</p>');
+    } else {
+      $(location).attr('href', '/');
+      console.log(data);
+    }
+  });
+});
+/* eslint-enable no-undef */

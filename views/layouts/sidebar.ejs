@@ -1,25 +1,32 @@
 <div class="sidebar">
+  <% if (!user.id && !user.login) { %>
   <div class="box forms auth visible box-active" id="auth">
     <h3 class="h3">AUTHORIZATION</h3>
     <form action="" method="post">
-      <input type="text" name="login" placeholder="Login">
-      <input type="password" name="password" placeholder="Password">
+      <input type="text" name="login" id="auth-login" placeholder="Login">
+      <input type="password" name="password" id="auth-pass" placeholder="Password">
       <div class="form-footer">
         <a href="#reg" class="btn-l box-link">REG</a>
-        <button class="btn">Auth</button>
+        <button class="btn auth-btn">Auth</button>
       </div>
     </form>
   </div>
   <div class="box forms reg" id="reg">
     <h3 class="h3">REGISTRATION</h3>
     <form action="" method="post">
-      <input type="text" name="login" placeholder="Login">
-      <input type="password" name="password" placeholder="Password">
-      <input type="password" name="confpassword" placeholder="Confirm password">
+      <input type="text" name="login" id="reg-login" placeholder="Login">
+      <input type="password" name="password" id="reg-pass" placeholder="Password">
+      <input type="password" name="confpassword" id="reg-passconf" placeholder="Confirm password">
       <div class="form-footer">
         <a href="#auth" class="btn-l box-link">AUTH</a>
-        <button class="btn">REG</button>
+        <button class="btn reg-btn">REG</button>
       </div>
     </form>
   </div>
+  <% } else { %>
+    <div class="box visible box-active">
+      <h3>Hello <%= user.login %>!</h3>
+      <a href="/api/auth/logout">Exit</a>
+    </div>
+  <% } %>
 </div>
