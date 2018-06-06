@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<% include layouts/head.ejs %>
+<% include ../layouts/head.ejs %>
 <body>
-  <% include layouts/header.ejs %>
+  <% include ../layouts/header.ejs %>
 
   <main class="main">
     <div class="container">
@@ -13,9 +13,7 @@
             <a href="/posts/<%= posts[i].url %>"><h3 class="h3"><%= posts[i].title %></h3></a>
             <p><%= posts[i].body %></p>
             <div class="post-footer">
-              <div class="author">
-                Author: <a href="/users/<%= posts[i].owner.login %>" class="link"><%= posts[i].owner.login %></a>
-              </div>
+              <div class="author"></div>
               <a class="link">
                 Comments
               </a>
@@ -25,20 +23,20 @@
         </div>
         <div class="pagination">
           <% if (current > 2) { %>
-            <a href="/page/<%= Number(current) - 1 %>" class="nav prev">< Prev</a>
+            <a href="/users/<%= _user.login %>/<%= Number(current) - 1 %>" class="nav prev">< Prev</a>
           <% } %>
           <% if (current == 2) { %>
-            <a href="/" class="nav prev">< Home</a>
+            <a href="/users/<%= _user.login %>" class="nav prev">< Home</a>
           <% } %>
           <% if (pages > 0 && current < pages) { %>
-            <a href="/page/<%= Number(current) + 1 %>" class="nav next">Next ></a>
+            <a href="/users/<%= _user.login %>/<%= Number(current) + 1 %>" class="nav next">Next ></a>
           <% } %>
         </div>
       </div>
-      <% include layouts/sidebar.ejs %>
+      <% include ../layouts/sidebar.ejs %>
     </div>
   </main>
 
-  <% include layouts/footer.ejs %>
+  <% include ../layouts/footer.ejs %>
 </body>
 </html>

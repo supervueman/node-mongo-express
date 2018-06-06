@@ -27,10 +27,11 @@ gulp.task(`sass`, () => {
 gulp.task(`js`, () => {
   return gulp
     .src([
+      `node_modules/medium-editor/dist/js/medium-editor.min.js`,
       `dev/js/common.js`
     ])
     .pipe(concat(`scripts.min.js`))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest(`public/js`));
 });
 

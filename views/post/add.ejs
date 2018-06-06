@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../layouts/head.ejs %>
+<body>
+  <% include ../layouts/header.ejs %>
+  <main class="main">
+    <div class="container">
+      <div class="content">
+        <div class="add-post box visible box-active">
+          <h3 class="h3">Add post</h3>
+          <form method="post">
+            <input type="text" name="posttitle" id="post-title" placeholder="Title">
+            <div id="postbody"></div>
+            <div class="form-footer">
+              <button class="btn save-post-btn">Save</button>
+              <button class="btn add-post-btn">Add post</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <% include ../layouts/sidebar.ejs %>
+    </div>
+  </main>
+  <% include ../layouts/footer.ejs %>
+</body>
+</html>

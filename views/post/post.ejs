@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../layouts/head.ejs %>
+<body>
+  <% include ../layouts/header.ejs %>
+
+  <main class="main">
+    <div class="container">
+      <div class="content">
+        <div class="posts">
+          <div class="post">
+            <a href=""><h3 class="h3"><%= post.title %></h3></a>
+            <p><%= post.body %></p>
+            <div class="post-footer">
+              <div class="author">
+                Author: <a href="" class="link"><%= post.owner %></a>
+              </div>
+              <a class="link">
+                Comments
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% include ../layouts/sidebar.ejs %>
+    </div>
+    <div class="comments container">
+      <div class="content">
+        <h3 class="h3">Comments</h3>
+        <div class="comment-list">
+          <span class="link" id="new">Send comment</span>
+          <form class="comment">
+            <textarea name="body"></textarea>
+            <div class="footer-comment">
+              <button class="cancel secondary">Cancel</button>
+              <button class="send">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <% include ../layouts/footer.ejs %>
+</body>
+</html>

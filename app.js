@@ -7,6 +7,7 @@ const session = require(`express-session`);
 const MongoStore = require(`connect-mongo`)(session);
 const config = require(`./config`);
 const routes = require(`./routes`);
+// const mocks = require(`./mocks`);
 
 //Database
 mongoose.Promise = global.Promise;
@@ -15,6 +16,7 @@ mongoose.connection
   .on(`error`, error => console.log(error))
   .on(`close`, () => console.log(`Database connection close`))
   .once(`open`, () => {
+    // mocks();
     const info = mongoose.connections[0];
     console.log(`Connected to ${info.host}:${info.port}/${info.name}`);
   })
@@ -45,20 +47,11 @@ app.use(
 );
 
 // Routers
-app.get(`/`, (req, res) => {
-  const id = req.session.userId;
-  const login = req.session.userLogin;
-  res.render(`index`, {
-    user: {
-      id,
-      login
-    }
-  })
-});
-
+app.use('/', routes.page);
 app.use('/api/auth/', routes.reg);
 app.use('/api/auth/', routes.auth);
 app.use('/api/auth/', routes.logout);
+app.use('/post', routes.post);
 
 app.use((req, res, next) => {
   const err = new Error(`Not Found`);
