@@ -1,5 +1,6 @@
 const mongoose = require(`mongoose`);
 const Schema = mongoose.Schema;
+const autopopulate = require(`mongoose-autopopulate`);
 
 const schema = new Schema({
   body: {
@@ -12,7 +13,8 @@ const schema = new Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: `User`
+    ref: `User`,
+    autopopulate: true
   },
   parent: {
     type: Schema.Types.ObjectId,
@@ -21,7 +23,8 @@ const schema = new Schema({
   children: [
     {
       type: Schema.Types.ObjectId,
-      ref: `Comment`
+      ref: `Comment`,
+      autopopulate: true
     }
   ],
   createdAt: {
@@ -32,6 +35,8 @@ const schema = new Schema({
 {
   timestamps: false
 });
+
+schema.plugin(autopopulate)
 
 schema.set(`toJSON`, {
   virtuals: true

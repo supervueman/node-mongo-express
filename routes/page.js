@@ -1,8 +1,10 @@
 const express = require(`express`);
 const config = require(`../config`);
 const models = require(`../models`);
+const moment = require(`moment`);
 
 const router = express.Router();
+moment.locale(`ru`);
 
 async function posts(req, res) {
   const userId = req.session.userId;
@@ -58,13 +60,20 @@ router.get(`/posts/:post`, async (req, res, next) => {
         err.status = 404;
         next(err);
       } else {
+        const comments = await models.Comment.find({
+          post: post.id,
+          parent: {$exists: false}
+        })
         res.render(`post/post`, {
           post,
+          moment,
           user: {
             id: userId,
             login: userLogin
-          }
+          },
+          comments
         });
+        console.log(comments)
       }
     } catch (err) {
       throw new Error(`Server Error`);

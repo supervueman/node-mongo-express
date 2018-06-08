@@ -52,6 +52,7 @@ app.use('/api/auth/', routes.reg);
 app.use('/api/auth/', routes.auth);
 app.use('/api/auth/', routes.logout);
 app.use('/post', routes.post);
+app.use('/comment', routes.comment);
 
 app.use((req, res, next) => {
   const err = new Error(`Not Found`);

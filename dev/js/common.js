@@ -89,17 +89,45 @@ $('.add-post-btn').click(function(e){
   });
 });
 
+var commentForm;
+var parentId;
+
+$('#new, #reply').click(function(){
+  if (commentForm) {
+    commentForm.remove();
+  }
+
+  parentId = null;
+
+  commentForm = $('.comment').clone(true, true);
+  if ($(this).attr('id') === 'new') {
+    commentForm.appendTo('.comment-list');
+  } else {
+    var parentComment = $(this).parent();
+    parentId = parentComment.data('itemid');
+    $(this).after(commentForm);
+  }
+  commentForm.css({'display': 'flex'});
+});
+
+$('.cancel').click(function(e){
+  e.preventDefault();
+  commentForm.remove();
+});
+
 $('.comment .send').click(function(e){
   e.preventDefault();
   var data = {
-    body: $('#postbody').html()
+    post: $('.comments').data('postid'),
+    body: commentForm.find('textarea').val(),
+    parent: parentId
   };
 
   $.ajax({
     type: 'POST',
     data: JSON.stringify(data),
     contentType: 'application/json',
-    url: '/post/add'
+    url: '/comment/add'
   }).done(function(data){
     if (!data.ok) {
       console.log('no ok');

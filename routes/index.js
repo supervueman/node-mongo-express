@@ -3,11 +3,13 @@ const auth = require(`./auth`);
 const logout = require(`./logout`);
 const post = require(`./post`);
 const page = require(`./page`);
+const comment = require(`./comment`);
 
 module.exports = {
   reg,
   auth,
   logout,
   post,
-  page
+  page,
+  comment
 }

@@ -24,10 +24,11 @@
       </div>
       <% include ../layouts/sidebar.ejs %>
     </div>
-    <div class="comments container">
+    <div class="comments container" data-postid="<%= post.id %>">
       <div class="content">
         <h3 class="h3">Comments</h3>
         <div class="comment-list">
+          <%- include('../layouts/comments.ejs', {items: comments}) %>
           <span class="link" id="new">Send comment</span>
           <form class="comment">
             <textarea name="body"></textarea>
