@@ -11,14 +11,15 @@
           <% for (var i = 0; i < posts.length; i++) { %>
           <div class="post">
             <a href="/posts/<%= posts[i].url %>"><h3 class="h3"><%= posts[i].title %></h3></a>
+            <% if (posts[i].owner.login === user.login) { %>
+              <a href="/post/edit/<%= posts[i].id %>">Edit</a>
+            <% } %>
             <p><%= posts[i].body %></p>
             <div class="post-footer">
               <div class="author">
                 Author: <a href="/users/<%= posts[i].owner.login %>" class="link"><%= posts[i].owner.login %></a>
               </div>
-              <a class="link">
-                Comments
-              </a>
+              <a href="/posts/<%= posts[i].url %>" class="link">Comments: <%= posts[i].commentCount %></a>
             </div>
           </div>
           <% } %>

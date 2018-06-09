@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../layouts/head.ejs %>
+<body>
+  <% include ../layouts/header.ejs %>
+  <main class="main">
+    <div class="container">
+      <div class="content">
+        <div class="add-post box visible box-active">
+          <% if (typeof post !== 'undefined') { %>
+            <h3 class="h3">Edit post</h3>
+          <% } else { %>
+            <h3 class="h3">Add post</h3>
+          <% } %>
+          <form method="post">
+            <input type="text" name="posttitle" id="post-title" placeholder="Title" value="<%= typeof post !== 'undefined' ? post.title : '' %>">
+            <input type="hidden" id="post-id" name="postId" value="<%= typeof post !== 'undefined' ? post.id : '' %>">
+            <textarea id="postbody" placeholder="Text" ><%= typeof post !== 'undefined' ? post.body : '' %></textarea>
+            <div class="form-footer">
+              <button class="btn save-post-btn">Save</button>
+              <button class="btn add-post-btn">Add post</button>
+            </div>
+          </form>
+          <form method="post" enctype="multipart/form-data" id="fileinfo">
+            <input type="file" name="file" id="file" required>
+            <button class="upload-btn">Upload image</button>
+          </form>
+        </div>
+      </div>
+      <% include ../layouts/sidebar.ejs %>
+    </div>
+  </main>
+  <% include ../layouts/footer.ejs %>
+</body>
+</html>

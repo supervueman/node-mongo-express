@@ -11,14 +11,6 @@
           <div class="post">
             <a href=""><h3 class="h3"><%= post.title %></h3></a>
             <p><%= post.body %></p>
-            <div class="post-footer">
-              <div class="author">
-                Author: <a href="" class="link"><%= post.owner %></a>
-              </div>
-              <a class="link">
-                Comments
-              </a>
-            </div>
           </div>
         </div>
       </div>
@@ -29,7 +21,6 @@
         <h3 class="h3">Comments</h3>
         <div class="comment-list">
           <%- include('../layouts/comments.ejs', {items: comments}) %>
-          <span class="link" id="new">Send comment</span>
           <form class="comment">
             <textarea name="body"></textarea>
             <div class="footer-comment">

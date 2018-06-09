@@ -8,7 +8,7 @@
         <span class="date"><%= moment(item.createdAt).fromNow(); %></span>
       </div>
       <%= item.body %>
-      <span class="link" id="reply">answer</span>
+      <span class="link reply">answer</span>
       <%- include('./comments.ejs', {items: item.children}) %>
     </li>
   <% }) %>

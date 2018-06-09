@@ -4,6 +4,7 @@ const logout = require(`./logout`);
 const post = require(`./post`);
 const page = require(`./page`);
 const comment = require(`./comment`);
+const upload = require(`./upload`);
 
 module.exports = {
   reg,
@@ -11,5 +12,6 @@ module.exports = {
   logout,
   post,
   page,
-  comment
+  comment,
+  upload
 }

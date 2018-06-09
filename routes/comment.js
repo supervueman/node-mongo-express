@@ -15,6 +15,13 @@ router.post(`/add`, async (req, res) => {
     const body = req.body.body;
     const parent = req.body.parent;
 
+    if (!body) {
+      res.json({
+        ok: false,
+        error: `Empty comment`
+      })
+    }
+
     try {
       if (!parent) {
         await models.Comment.create({
@@ -22,12 +29,18 @@ router.post(`/add`, async (req, res) => {
           body,
           owner: userId
         });
+        res.json({
+          ok: true,
+          body,
+          login: userLogin
+        });
       } else {
         const parentComment = await models.Comment.findById(parent);
 
         if (!parentComment) {
           res.json({
-            ok: false
+            ok: false,
+            error: `text`
           });
         }
 
@@ -44,6 +57,12 @@ router.post(`/add`, async (req, res) => {
         parentComment.children = children;
 
         await parentComment.save();
+
+        res.json({
+          ok: true,
+          body,
+          login: userLogin
+        });
       }
     } catch (error) {
       res.json({

@@ -13,7 +13,9 @@ async function posts(req, res) {
   const page = req.params.page || 1;
 
   try {
-    const posts = await models.Post.find({})
+    const posts = await models.Post.find({
+      status: `published`
+    })
       .skip(perPage * page - perPage)
       .limit(perPage)
       .populate(`owner`)
@@ -54,7 +56,10 @@ router.get(`/posts/:post`, async (req, res, next) => {
     next(err);
   } else {
     try {
-      const post = await models.Post.findOne({ url });
+      const post = await models.Post.findOne({
+        url,
+        status: `published`
+      });
       if (!post) {
         const err = new Error(`Not Found`);
         err.status = 404;
@@ -95,7 +100,8 @@ router.get(`/users/:login/:page*?`, async (req, res) => {
     const posts = await models.Post.find({ owner: user.id })
       .skip(perPage * page - perPage)
       .limit(perPage)
-      .sort({createdAt: -1});
+      .sort({createdAt: -1})
+      .populate(`owner`);
     const count = await models.Post.count({ owner: user.id });
 
     res.render(`user/user`, {

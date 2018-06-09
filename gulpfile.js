@@ -5,8 +5,8 @@ const gulp = require(`gulp`),
       autoprefixer = require(`gulp-autoprefixer`),
       cssnano = require(`gulp-cssnano`),
       plumber = require(`gulp-plumber`),
-      concat = require(`gulp-concat`),
-      uglify = require(`gulp-uglify`);
+      concat = require(`gulp-concat`);
+      //uglify = require(`gulp-uglify`);
 
 /* eslint-enable node/no-unpublished-require */
 
@@ -27,7 +27,6 @@ gulp.task(`sass`, () => {
 gulp.task(`js`, () => {
   return gulp
     .src([
-      `node_modules/medium-editor/dist/js/medium-editor.min.js`,
       `dev/js/common.js`
     ])
     .pipe(concat(`scripts.min.js`))

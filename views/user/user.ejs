@@ -13,7 +13,7 @@
             <a href="/posts/<%= posts[i].url %>"><h3 class="h3"><%= posts[i].title %></h3></a>
             <p><%= posts[i].body %></p>
             <div class="post-footer">
-              <div class="author"></div>
+              <div class="author"><%= posts[i].owner.login %></div>
               <a class="link">
                 Comments
               </a>
